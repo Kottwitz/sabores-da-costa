@@ -1,0 +1,340 @@
+/* ==========================================
+   IDENTIDADE VISUAL - SABORES DA COSTA
+   ========================================== */
+:root {
+    --deep-ocean: #163853;
+    --cerulean: #3b94a6;
+    --turquoise-coral: #e06d53;
+    --sand: #e6d5be;
+    --shell: #fbf8f2;
+    --text-main: #2c3e50;
+    --text-muted: #64748b;
+    --white: #ffffff;
+    --border-color: #e2d9cd;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--shell);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Barra Superior SaaS / Demo Portfolio */
+.saas-topbar {
+    background-color: var(--deep-ocean);
+    color: var(--white);
+    padding: 0.8rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.brand-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.badge-demo {
+    background-color: var(--turquoise-coral);
+    color: var(--white);
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-links a {
+    color: var(--sand);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--white);
+    border-bottom: 2px solid var(--turquoise-coral);
+    padding-bottom: 2px;
+}
+
+/* Header Principal */
+.hero {
+    text-align: center;
+    padding: 2.5rem 1rem 1.5rem 1rem;
+    background-color: var(--sand);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.hero h1 {
+    color: var(--deep-ocean);
+    font-size: 2.2rem;
+    margin-bottom: 0.4rem;
+}
+
+.hero p {
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+/* Layout Container */
+.container {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    flex-grow: 1;
+    width: 100%;
+}
+
+/* Grid de Produtos (Estilo Tablet da Imagem) */
+.grid-produtos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.produto-card {
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 8px rgba(22, 56, 83, 0.04);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.produto-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(22, 56, 83, 0.08);
+}
+
+.produto-img {
+    height: 160px;
+    background-size: cover;
+    background-position: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.produto-info {
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.categoria-tag {
+    font-size: 0.75rem;
+    color: var(--cerulean);
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.5px;
+}
+
+.produto-info h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    color: var(--deep-ocean);
+}
+
+.produto-info p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    flex-grow: 1;
+    margin-bottom: 1.2rem;
+    line-height: 1.4;
+}
+
+.produto-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    border-top: 1px solid #f0e9e1;
+    padding-top: 0.8rem;
+}
+
+.preco {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--deep-ocean);
+}
+
+.btn-pedir {
+    background: var(--deep-ocean);
+    color: var(--white);
+    border: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+}
+
+.btn-pedir:hover {
+    background: var(--cerulean);
+}
+
+/* Painel Admin Estilizado */
+.admin-container {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    width: 100%;
+}
+
+.admin-header {
+    margin-bottom: 2rem;
+}
+
+.admin-header h2 {
+    color: var(--deep-ocean);
+    margin-bottom: 0.3rem;
+}
+
+.admin-header p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.admin-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 2rem;
+}
+
+@media (max-width: 768px) {
+    .admin-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.admin-card {
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+}
+
+.admin-card h3 {
+    color: var(--deep-ocean);
+    margin-bottom: 1.2rem;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--deep-ocean);
+    margin-bottom: 0.3rem;
+}
+
+.form-group input, .form-group textarea, .form-group select {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--shell);
+    color: var(--text-main);
+    font-size: 0.9rem;
+}
+
+.form-group textarea {
+    resize: vertical;
+    height: 80px;
+}
+
+.btn-primary {
+    background: var(--deep-ocean);
+    color: var(--white);
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 4px;
+    width: 100%;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-primary:hover {
+    background: var(--cerulean);
+}
+
+.admin-item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--shell);
+    padding: 0.8rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 0.6rem;
+    border: 1px solid var(--border-color);
+}
+
+.item-preco {
+    color: var(--cerulean);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.btn-delete {
+    background: #e74c3c;
+    color: var(--white);
+    border: none;
+    padding: 0.4rem 0.7rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-delete:hover {
+    background: #c0392b;
+}
+.btn-neon-danger {
+    background-color: #0d0d0d;
+    color: #ff3333; /* Vermelho neon para indicar ação de apagar/resetar */
+    border: 2px solid #ff3333;
+    padding: 10px 20px;
+    font-family: inherit;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 8px rgba(255, 51, 51, 0.4);
+    border-radius: 4px;
+}
+
+.btn-neon-danger:hover {
+    background-color: #ff3333;
+    color: #0d0d0d;
+    box-shadow: 0 0 15px rgba(255, 51, 51, 0.8);
+}

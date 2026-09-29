@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Gestão | Sabores da Costa</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos de Impressão de Comanda para a Cozinha */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            .comanda-impressao, .comanda-impressao * {
+                visibility: visible;
+            }
+            .comanda-impressao {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                background: white;
+                color: black;
+                padding: 20px;
+                font-family: monospace;
+            }
+        }
+    </style>
+</head>
+<body class="admin-body">
+    <!-- Barra Superior do Admin -->
+    <nav class="saas-topbar">
+        <div class="brand-info">
+            <span class="badge-demo admin-badge">Painel Restrito</span>
+            <strong>Sabores da Costa - Gestão</strong>
+        </div>
+        <div class="nav-links">
+            <a href="index.html"><i class="fas fa-eye"></i> Ver Site Público</a>
+            <a href="admin.html" class="active"><i class="fas fa-chart-line"></i> Gestão Admin</a>
+        </div>
+    </nav>
+
+    <div class="admin-container">
+        <header class="admin-header">
+            <h2><i class="fas fa-sliders-h"></i> Gestão do Cardápio, Mesas e Pedidos</h2>
+            <p>Faça a gestão das mesas do restaurante, acompanhe os pedidos ativos e consulte o histórico de vendas.</p>
+        </header>
+
+        <!-- SECÇÃO DE GESTÃO DE MESAS E PEDIDOS POR MESA -->
+        <div class="admin-card" style="margin-bottom: 2rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+                <h3 style="margin: 0;"><i class="fas fa-chair"></i> Gestão de Mesas e Pedidos em Tempo Real</h3>
+                
+                <!-- Formulário para Adicionar Nova Mesa -->
+                <form id="formAdicionarMesa" onsubmit="adicionarMesaSandbox(event)" style="display: flex; gap: 0.5rem;">
+                    <input type="text" id="inputNovaMesa" required placeholder="Ex: Mesa 05 ou Terraço 1" style="padding: 0.4rem; border: 1px solid var(--border-color); border-radius: 4px;">
+                    <button type="submit" class="btn-primary" style="padding: 0.4rem 0.8rem; font-size: 0.9rem;">Adicionar Mesa</button>
+                </form>
+            </div>
+
+            <!-- Grelha de Mesas Dinâmicas -->
+            <div id="gridMesasAdmin" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem;">
+                <p class="loading-text">A carregar mesas...</p>
+            </div>
+        </div>
+
+        <!-- SECÇÃO DE HISTÓRICO DE PEDIDOS CONCLUÍDOS E FATURAMENTO -->
+        <div class="admin-card" style="margin-bottom: 2rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.2rem;">
+                <h3 style="margin: 0;"><i class="fas fa-history"></i> Histórico de Pedidos Concluídos (Faturamento do Dia)</h3>
+                <div style="background: var(--shell); padding: 0.5rem 1rem; border-radius: 6px; border: 1px solid var(--border-color);">
+                    <span style="font-size: 0.9rem; color: var(--text-muted);">Total Faturado: </span>
+                    <strong id="faturamentoTotalDia" style="color: #10b981; font-size: 1.1rem;">R$ 0,00</strong>
+                </div>
+            </div>
+            
+            <div id="listaHistoricoPedidos" style="max-height: 300px; overflow-y: auto; display: flex; flex-direction: column; gap: 0.5rem;">
+                <p style="color: var(--text-muted); font-style: italic;">Nenhum pedido concluído ainda hoje.</p>
+            </div>
+
+            <div style="margin-top: 1rem; text-align: right;">
+                <button type="button" onclick="limparHistoricoConcluidos()" class="btn-neon-danger" style="font-size: 0.85rem; padding: 0.3rem 0.8rem;">
+                    <i class="fas fa-trash"></i> Limpar Histórico
+                </button>
+            </div>
+        </div>
+
+        <div class="admin-grid">
+            <!-- Formulário de Adição de Prato & Reset -->
+            <div class="admin-card">
+                <h3><i class="fas fa-plus-circle"></i> Novo Prato</h3>
+                <form id="formAdicionarProduto" onsubmit="adicionarProdutoSandbox(event)">
+                    <div class="form-group">
+                        <label>Nome do Prato</label>
+                        <input type="text" id="inputNome" required placeholder="Ex: Moqueca de Badejo">
+                    </div>
+                    <div class="form-group">
+                        <label>Descrição</label>
+                        <textarea id="inputDesc" required placeholder="Ingredientes e detalhes..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Preço (R$)</label>
+                        <input type="number" step="0.01" id="inputPreco" required placeholder="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label>Categoria</label>
+                        <input type="text" id="inputCategoria" value="Pratos Principais" readonly style="background: var(--shell); cursor: not-allowed;">
+                        <small style="color: var(--text-muted); font-size: 0.75rem;">Categorias organizadas: Entradas, Pratos Principais, Sobremesas, Bebidas.</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Imagem do Prato (Do Dispositivo)</label>
+                        <input type="file" id="inputImagemFile" accept="image/*" required style="padding: 0.4rem; background: var(--white);">
+                    </div>
+                    <button type="submit" class="btn-primary">Cadastrar no Sandbox</button>
+                </form>
+
+                <!-- Botão de Resetar Cardápio -->
+                <div style="margin-top: 1.5rem; border-top: 1px solid var(--border-color); padding-top: 1.2rem;">
+                    <button type="button" onclick="restaurarPadraoSandbox()" class="btn-neon-danger" style="width: 100%;">
+                        <i class="fas fa-undo"></i> Resetar Tudo para o Padrão
+                    </button>
+                </div>
+            </div>
+
+            <!-- Listagem de Pratos Ativos -->
+            <div class="admin-card">
+                <h3><i class="fas fa-list"></i> Pratos Ativos no Sandbox</h3>
+                <div id="listaAdminProdutos" class="admin-table-list">
+                    <p class="loading-text">A carregar pratos da sessão...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Div oculta utilizada exclusivamente para impressão de comandas -->
+    <div id="comandaImpressaoArea" class="comanda-impressao" style="display: none;"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
