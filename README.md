@@ -6,7 +6,7 @@
 ![Tecnologias](https://img.shields.io/badge/Tech-HTML5_%7C_CSS3_%7C_JavaScript-blue)
 
 ## 🚀 Sobre o Projeto
-O **Sabores da Costa** simula um software como serviço (SaaS) voltado para o setor de restauração. O sistema divide-se em duas vertentes principais:
+O **Sabores da Costa** simula um software como serviço (SaaS) voltado para o setor de restaurante. O sistema divide-se em duas vertentes principais:
 1. **Site Público (Cardápio Digital):** Onde o cliente simula a escolha da mesa, navega pelas categorias de pratos e adiciona itens ao carrinho para submeter o pedido instantaneamente.
 2. **Painel Administrativo (SaaS Dashboard):** Um painel restrito para gestores e staff acompanharem mesas ativas em tempo real, gerirem o estado dos pedidos, efetuarem a impressão de comandas de cozinha e analisarem o faturamento diário.
 
